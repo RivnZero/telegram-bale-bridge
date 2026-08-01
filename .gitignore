@@ -1,0 +1,18 @@
+# Binary
+bridge
+bridge.exe
+
+# Data (DB + temp media)
+data/
+
+# Environment
+.env
+
+# Go
+*.test
+*.out
+vendor/
+
+# OMC/OMO state
+.omc/
+.omo/
