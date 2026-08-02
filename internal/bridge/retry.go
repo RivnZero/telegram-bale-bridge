@@ -1,13 +1,16 @@
 package bridge
+
 import (
 	"context"
 	"time"
 )
+
 type RetryPolicy struct {
-	Delays     []time.Duration
+	Delays      []time.Duration
 	IsTemporary func(error) bool
 	RetryAfter  func(error) float64
 }
+
 func WithRetry[T any](ctx context.Context, policy RetryPolicy, fn func() (T, error)) (T, error) {
 	var zero T
 	for attempt := 0; ; attempt++ {

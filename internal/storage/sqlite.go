@@ -1,21 +1,25 @@
 package storage
+
 import (
 	"context"
 	"database/sql"
 	"errors"
 	"fmt"
+	"github.com/RivnZero/telegram-bale-bridge/internal/bridge"
+	"github.com/RivnZero/telegram-bale-bridge/migrations"
 	_ "modernc.org/sqlite"
-	"telegram-bale-bridge/internal/bridge"
-	"telegram-bale-bridge/migrations"
 )
+
 const (
 	statusProcessing = "processing"
 	statusDelivered  = "delivered"
 	statusFailed     = "failed"
 )
+
 type SQLite struct {
 	db *sql.DB
 }
+
 func Open(path string) (*SQLite, error) {
 	dsn := "file:" + path + "?_pragma=busy_timeout(5000)&_pragma=journal_mode(WAL)"
 	db, err := sql.Open("sqlite", dsn)

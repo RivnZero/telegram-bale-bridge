@@ -1,9 +1,11 @@
 package telegram
+
 import (
+	"github.com/go-telegram/bot"
 	"net/http"
 	"time"
-	"github.com/go-telegram/bot"
 )
+
 func NewBot(token, serverURL string, handler bot.HandlerFunc) (*bot.Bot, error) {
 	return bot.New(token,
 		bot.WithServerURL(serverURL),

@@ -1,9 +1,11 @@
 package bridge
+
 import (
 	"sort"
 	"sync"
 	"time"
 )
+
 type AlbumBuffer struct {
 	mu     sync.Mutex
 	groups map[AlbumKey]*albumGroup
@@ -14,6 +16,7 @@ type albumGroup struct {
 	items []*BridgeMessage
 	timer *time.Timer
 }
+
 func NewAlbumBuffer(delay time.Duration, flush func(*AlbumUnit)) *AlbumBuffer {
 	return &AlbumBuffer{groups: make(map[AlbumKey]*albumGroup), delay: delay, flush: flush}
 }

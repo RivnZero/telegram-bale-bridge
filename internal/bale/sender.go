@@ -3,8 +3,8 @@ package bale
 import (
 	"context"
 	"fmt"
+	"github.com/RivnZero/telegram-bale-bridge/internal/bridge"
 	"os"
-	"telegram-bale-bridge/internal/bridge"
 )
 
 const (

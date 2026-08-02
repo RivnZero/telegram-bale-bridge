@@ -1,4 +1,4 @@
-module telegram-bale-bridge
+module github.com/RivnZero/telegram-bale-bridge
 
 go 1.26.3
 

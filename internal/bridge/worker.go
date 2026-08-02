@@ -1,4 +1,5 @@
 package bridge
+
 import (
 	"context"
 	"errors"
@@ -10,7 +11,9 @@ import (
 	"sync"
 	"time"
 )
+
 const MaxFileSizeBytes = 20 * 1024 * 1024
+
 type Sender interface {
 	Platform() Platform
 	ChatID() int64
@@ -38,9 +41,10 @@ type Worker struct {
 	queue      chan any
 	albums     *AlbumBuffer
 	policy     RetryPolicy
-	mu     sync.Mutex
-	closed bool
+	mu         sync.Mutex
+	closed     bool
 }
+
 func NewWorker(
 	logger *slog.Logger,
 	store Store,

@@ -1,4 +1,5 @@
 package config
+
 import (
 	"fmt"
 	"log/slog"
@@ -7,35 +8,39 @@ import (
 	"strings"
 	"time"
 )
+
 type Direction string
+
 const (
 	TelegramToBale Direction = "telegram-to-bale"
 	BaleToTelegram Direction = "bale-to-telegram"
 	Bidirectional  Direction = "bidirectional"
 )
+
 type Config struct {
-	TelegramBotToken    string
-	TelegramAPIBaseURL  string
-	TelegramChatID      int64
-	BaleBotToken        string
-	BaleChatID          int64
-	BaleAPIBaseURL      string
-	Direction Direction
-	DatabasePath string
-	TempDir      string
-	QueueSize    int
-	AlbumDelay   time.Duration
-	LogLevel     slog.Level
+	TelegramBotToken   string
+	TelegramAPIBaseURL string
+	TelegramChatID     int64
+	BaleBotToken       string
+	BaleChatID         int64
+	BaleAPIBaseURL     string
+	Direction          Direction
+	DatabasePath       string
+	TempDir            string
+	QueueSize          int
+	AlbumDelay         time.Duration
+	LogLevel           slog.Level
 }
+
 func Load() (*Config, error) {
 	get := func(key string) string { return strings.TrimSpace(os.Getenv(key)) }
 	cfg := &Config{
-		TelegramBotToken:    get("TELEGRAM_BOT_TOKEN"),
-		TelegramAPIBaseURL:  strings.TrimRight(get("TELEGRAM_API_BASE_URL"), "/"),
-		BaleBotToken:        get("BALE_BOT_TOKEN"),
-		BaleAPIBaseURL:      strings.TrimRight(get("BALE_API_BASE_URL"), "/"),
-		DatabasePath:        defaultStr(get("DATABASE_PATH"), "./data/bridge.db"),
-		TempDir:             defaultStr(get("TEMP_DIRECTORY"), "./data/tmp"),
+		TelegramBotToken:   get("TELEGRAM_BOT_TOKEN"),
+		TelegramAPIBaseURL: strings.TrimRight(get("TELEGRAM_API_BASE_URL"), "/"),
+		BaleBotToken:       get("BALE_BOT_TOKEN"),
+		BaleAPIBaseURL:     strings.TrimRight(get("BALE_API_BASE_URL"), "/"),
+		DatabasePath:       defaultStr(get("DATABASE_PATH"), "./data/bridge.db"),
+		TempDir:            defaultStr(get("TEMP_DIRECTORY"), "./data/tmp"),
 	}
 	if cfg.TelegramAPIBaseURL == "" {
 		cfg.TelegramAPIBaseURL = "https://api.telegram.org"

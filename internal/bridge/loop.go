@@ -1,13 +1,16 @@
 package bridge
+
 import (
 	"sync"
 	"time"
 )
+
 type SentTracker struct {
 	mu   sync.Mutex
 	ttl  time.Duration
 	seen map[SentKey]time.Time
 }
+
 func NewSentTracker(ttl time.Duration) *SentTracker {
 	return &SentTracker{ttl: ttl, seen: make(map[SentKey]time.Time)}
 }

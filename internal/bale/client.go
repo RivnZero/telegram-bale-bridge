@@ -1,4 +1,5 @@
 package bale
+
 import (
 	"bytes"
 	"context"
@@ -15,17 +16,20 @@ import (
 	"strconv"
 	"strings"
 )
+
 const (
-	DefaultBaseURL = "https://tapi.bale.ai"
-	LongPollTimeout = 25
+	DefaultBaseURL    = "https://tapi.bale.ai"
+	LongPollTimeout   = 25
 	MaxUpdatesPerPoll = 100
 )
+
 type APIError struct {
 	Method      string
 	Description string
 	Code        int
 	RetryAfter  int
 }
+
 func (e *APIError) Error() string {
 	if e.Code != 0 {
 		return fmt.Sprintf("bale %s failed (%d): %s", e.Method, e.Code, e.Description)
@@ -57,6 +61,7 @@ func RetryAfterSeconds(err error) float64 {
 	}
 	return 0
 }
+
 type apiEnvelope struct {
 	OK          bool            `json:"ok"`
 	Result      json.RawMessage `json:"result"`
@@ -72,6 +77,7 @@ type Client struct {
 	BaseURL string
 	HTTP    *http.Client
 }
+
 func NewClient(token, baseURL string, hc *http.Client) *Client {
 	if baseURL == "" {
 		baseURL = DefaultBaseURL
@@ -84,12 +90,14 @@ func NewClient(token, baseURL string, hc *http.Client) *Client {
 func (c *Client) endpoint(method string) string {
 	return fmt.Sprintf("%s/bot%s/%s", c.BaseURL, c.Token, method)
 }
+
 type formField struct{ Name, Value string }
 type filePart struct {
 	Field    string
 	Filename string
 	Reader   io.Reader
 }
+
 func (c *Client) doJSON(ctx context.Context, method string, form url.Values) (json.RawMessage, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.endpoint(method), strings.NewReader(form.Encode()))
 	if err != nil {
@@ -246,11 +254,13 @@ func (c *Client) SendMedia(ctx context.Context, method, field string, chatID int
 	}
 	return mr.MessageID, nil
 }
+
 type MediaGroupItem struct {
 	Kind    MediaKind
 	Path    string
 	Caption string
 }
+
 func (c *Client) SendMediaGroup(ctx context.Context, chatID int64, items []MediaGroupItem) ([]int64, error) {
 	type mediaJSON struct {
 		Type    string `json:"type"`

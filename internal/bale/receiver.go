@@ -1,8 +1,10 @@
 package bale
+
 import (
 	"context"
-	"telegram-bale-bridge/internal/bridge"
+	"github.com/RivnZero/telegram-bale-bridge/internal/bridge"
 )
+
 type Receiver struct {
 	client  *Client
 	chatID  int64
@@ -10,6 +12,7 @@ type Receiver struct {
 	tracker *bridge.SentTracker
 	submit  func(context.Context, *bridge.BridgeMessage)
 }
+
 func NewReceiver(client *Client, chatID, botID int64, tracker *bridge.SentTracker, submit func(context.Context, *bridge.BridgeMessage)) *Receiver {
 	return &Receiver{client: client, chatID: chatID, botID: botID, tracker: tracker, submit: submit}
 }

@@ -1,14 +1,17 @@
 package bale
+
 import (
 	"context"
 	"log/slog"
 	"time"
 )
+
 type Poller struct {
 	client *Client
 	logger *slog.Logger
 	handle func(context.Context, *Message)
 }
+
 func NewPoller(client *Client, logger *slog.Logger, handle func(context.Context, *Message)) *Poller {
 	return &Poller{client: client, logger: logger, handle: handle}
 }

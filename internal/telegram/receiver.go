@@ -1,21 +1,24 @@
 package telegram
+
 import (
 	"context"
 	"fmt"
+	"github.com/RivnZero/telegram-bale-bridge/internal/bridge"
+	"github.com/go-telegram/bot"
+	"github.com/go-telegram/bot/models"
 	"io"
 	"net/http"
 	"os"
 	"time"
-	"github.com/go-telegram/bot"
-	"github.com/go-telegram/bot/models"
-	"telegram-bale-bridge/internal/bridge"
 )
+
 type Receiver struct {
 	b       *bot.Bot
 	chatID  int64
 	tracker *bridge.SentTracker
 	submit  func(context.Context, *bridge.BridgeMessage)
 }
+
 func NewReceiver(b *bot.Bot, chatID int64, tracker *bridge.SentTracker, submit func(context.Context, *bridge.BridgeMessage)) *Receiver {
 	return &Receiver{b: b, chatID: chatID, tracker: tracker, submit: submit}
 }

@@ -1,19 +1,22 @@
 package telegram
+
 import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/RivnZero/telegram-bale-bridge/internal/bridge"
+	"github.com/go-telegram/bot"
+	"github.com/go-telegram/bot/models"
 	"net"
 	"os"
 	"path/filepath"
-	"github.com/go-telegram/bot"
-	"github.com/go-telegram/bot/models"
-	"telegram-bale-bridge/internal/bridge"
 )
+
 type Sender struct {
 	b      *bot.Bot
 	chatID int64
 }
+
 func NewSender(b *bot.Bot, chatID int64) *Sender {
 	return &Sender{b: b, chatID: chatID}
 }

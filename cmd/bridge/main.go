@@ -1,7 +1,15 @@
 package main
+
 import (
 	"context"
 	"fmt"
+	"github.com/RivnZero/telegram-bale-bridge/internal/bale"
+	"github.com/RivnZero/telegram-bale-bridge/internal/bridge"
+	"github.com/RivnZero/telegram-bale-bridge/internal/config"
+	"github.com/RivnZero/telegram-bale-bridge/internal/storage"
+	"github.com/RivnZero/telegram-bale-bridge/internal/telegram"
+	"github.com/go-telegram/bot"
+	"github.com/go-telegram/bot/models"
 	"log/slog"
 	"net/http"
 	"os"
@@ -9,14 +17,8 @@ import (
 	"sync"
 	"syscall"
 	"time"
-	"github.com/go-telegram/bot"
-	"github.com/go-telegram/bot/models"
-	"telegram-bale-bridge/internal/bale"
-	"telegram-bale-bridge/internal/bridge"
-	"telegram-bale-bridge/internal/config"
-	"telegram-bale-bridge/internal/storage"
-	"telegram-bale-bridge/internal/telegram"
 )
+
 func main() {
 	cfg, err := config.Load()
 	if err != nil {

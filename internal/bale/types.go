@@ -1,4 +1,5 @@
 package bale
+
 type Update struct {
 	UpdateID int64    `json:"update_id"`
 	Message  *Message `json:"message"`
@@ -77,6 +78,7 @@ type MessageResult struct {
 	MessageID int64 `json:"message_id"`
 }
 type MediaKind string
+
 const (
 	MediaPhoto     MediaKind = "photo"
 	MediaVideo     MediaKind = "video"

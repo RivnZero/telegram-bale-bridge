@@ -1,13 +1,18 @@
 package bridge
+
 import (
 	"fmt"
 )
+
 type Platform string
+
 const (
 	PlatformTelegram Platform = "telegram"
 	PlatformBale     Platform = "bale"
 )
+
 type MessageKind string
+
 const (
 	KindText      MessageKind = "text"
 	KindPhoto     MessageKind = "photo"
@@ -17,25 +22,28 @@ const (
 	KindVoice     MessageKind = "voice"
 	KindAnimation MessageKind = "animation"
 )
+
 type BridgeMessage struct {
 	SourcePlatform  Platform
 	SourceChatID    int64
 	SourceMessageID int64
-	Kind         MessageKind
-	Text         string
-	Caption      string
-	FileID       string
-	FileName     string
-	MIMEType     string
-	FileSize     int64
-	MediaGroupID string
+	Kind            MessageKind
+	Text            string
+	Caption         string
+	FileID          string
+	FileName        string
+	MIMEType        string
+	FileSize        int64
+	MediaGroupID    string
 }
+
 func (m *BridgeMessage) DedupeKey() string {
 	if m.MediaGroupID != "" {
 		return "album:" + m.MediaGroupID
 	}
 	return fmt.Sprintf("message:%d", m.SourceMessageID)
 }
+
 type AlbumKey struct {
 	Platform     Platform
 	ChatID       int64
