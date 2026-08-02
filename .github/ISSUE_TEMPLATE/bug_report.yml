@@ -1,0 +1,76 @@
+name: Bug report
+description: Report a problem with the bridge
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Do not include bot tokens or other secrets.
+  - type: input
+    id: version
+    attributes:
+      label: Bridge version
+      description: Output of `bridge -version`
+      placeholder: v0.1.0, commit abc1234
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installation method
+      options:
+        - Docker
+        - Binary
+        - Source
+    validations:
+      required: true
+  - type: dropdown
+    id: direction
+    attributes:
+      label: Direction
+      options:
+        - Telegram → Bale
+        - Bale → Telegram
+        - Bidirectional
+    validations:
+      required: true
+  - type: dropdown
+    id: message-type
+    attributes:
+      label: Message type
+      options:
+        - Text
+        - Photo
+        - Video
+        - Document
+        - Audio
+        - Voice
+        - GIF / animation
+        - Album
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Paste logs with tokens removed. Do not include bot tokens or other secrets.
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: Ubuntu 24.04, Windows 11, macOS 15
+    validations:
+      required: true
