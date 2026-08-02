@@ -277,7 +277,7 @@ See [Configuration](#configuration) for all available options.
 ### 4. Run locally
 
 ```bash
-go build -o bridge ./cmd/bridge
+make build
 ./bridge
 ```
 
@@ -639,6 +639,14 @@ go build ./... &&
 go vet ./... &&
 go test ./...
 ```
+
+### Version information
+
+```bash
+./bridge -version
+```
+
+Release builds include the version, commit hash, and build timestamp. Development builds use dev and unknown values when build metadata is not provided.
 
 ---
 
