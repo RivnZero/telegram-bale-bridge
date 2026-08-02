@@ -13,14 +13,6 @@ const (
 	statusDelivered  = "delivered"
 	statusFailed     = "failed"
 )
-type Store interface {
-	Delivered(ctx context.Context, src bridge.Platform, srcChatID int64, srcKey string, dest bridge.Platform) (bool, error)
-	MarkProcessing(ctx context.Context, src bridge.Platform, srcChatID int64, srcKey string, dest bridge.Platform) (bool, error)
-	MarkDelivered(ctx context.Context, src bridge.Platform, srcChatID int64, srcKey string, dest bridge.Platform, destMessageID int64) error
-	MarkFailed(ctx context.Context, src bridge.Platform, srcChatID int64, srcKey string, dest bridge.Platform, errMsg string) error
-	RecoverInterrupted(ctx context.Context) (int64, error)
-	Close() error
-}
 type SQLite struct {
 	db *sql.DB
 }

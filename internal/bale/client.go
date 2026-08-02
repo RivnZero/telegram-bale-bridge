@@ -81,10 +81,6 @@ func NewClient(token, baseURL string, hc *http.Client) *Client {
 	}
 	return &Client{Token: token, BaseURL: strings.TrimRight(baseURL, "/"), HTTP: hc}
 }
-func (c *Client) BotID() int64 {
-	id, _ := strconv.ParseInt(strings.SplitN(c.Token, ":", 2)[0], 10, 64)
-	return id
-}
 func (c *Client) endpoint(method string) string {
 	return fmt.Sprintf("%s/bot%s/%s", c.BaseURL, c.Token, method)
 }
@@ -249,24 +245,6 @@ func (c *Client) SendMedia(ctx context.Context, method, field string, chatID int
 		return 0, err
 	}
 	return mr.MessageID, nil
-}
-func (c *Client) SendPhoto(ctx context.Context, chatID int64, path, caption string) (int64, error) {
-	return c.SendMedia(ctx, "sendPhoto", "photo", chatID, path, caption)
-}
-func (c *Client) SendVideo(ctx context.Context, chatID int64, path, caption string) (int64, error) {
-	return c.SendMedia(ctx, "sendVideo", "video", chatID, path, caption)
-}
-func (c *Client) SendDocument(ctx context.Context, chatID int64, path, caption string) (int64, error) {
-	return c.SendMedia(ctx, "sendDocument", "document", chatID, path, caption)
-}
-func (c *Client) SendAudio(ctx context.Context, chatID int64, path, caption string) (int64, error) {
-	return c.SendMedia(ctx, "sendAudio", "audio", chatID, path, caption)
-}
-func (c *Client) SendVoice(ctx context.Context, chatID int64, path, caption string) (int64, error) {
-	return c.SendMedia(ctx, "sendVoice", "voice", chatID, path, caption)
-}
-func (c *Client) SendAnimation(ctx context.Context, chatID int64, path, caption string) (int64, error) {
-	return c.SendMedia(ctx, "sendAnimation", "animation", chatID, path, caption)
 }
 type MediaGroupItem struct {
 	Kind    MediaKind

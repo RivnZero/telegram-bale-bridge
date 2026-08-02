@@ -1,6 +1,6 @@
 # Binary
-bridge
-bridge.exe
+/bridge
+/bridge.exe
 
 # Data (DB + temp media)
 data/
@@ -16,3 +16,6 @@ vendor/
 # OMC/OMO state
 .omc/
 .omo/
+
+# Graphify knowledge graph
+.graphify/

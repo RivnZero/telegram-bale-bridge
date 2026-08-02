@@ -27,11 +27,8 @@ type Config struct {
 	AlbumDelay   time.Duration
 	LogLevel     slog.Level
 }
-func Load(env map[string]string) (*Config, error) {
-	if env == nil {
-		env = environ()
-	}
-	get := func(key string) string { return strings.TrimSpace(env[key]) }
+func Load() (*Config, error) {
+	get := func(key string) string { return strings.TrimSpace(os.Getenv(key)) }
 	cfg := &Config{
 		TelegramBotToken:    get("TELEGRAM_BOT_TOKEN"),
 		TelegramAPIBaseURL:  strings.TrimRight(get("TELEGRAM_API_BASE_URL"), "/"),
@@ -137,13 +134,4 @@ func defaultStr(v, def string) string {
 		return def
 	}
 	return v
-}
-func environ() map[string]string {
-	m := make(map[string]string)
-	for _, kv := range os.Environ() {
-		if i := strings.IndexByte(kv, '='); i >= 0 {
-			m[kv[:i]] = kv[i+1:]
-		}
-	}
-	return m
 }
