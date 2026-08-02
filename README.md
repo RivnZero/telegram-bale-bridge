@@ -1,5 +1,9 @@
 # Telegram–Bale Bridge
 
+<p align="center">
+  <img src="assets/logo.webp" alt="Telegram–Bale Bridge logo" width="180">
+</p>
+
 ![Go](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-deduplication-003B57?logo=sqlite&logoColor=white)
