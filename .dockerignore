@@ -1,0 +1,9 @@
+.git
+.github
+.env
+data
+*.db
+*.log
+/bridge
+README.md
+LICENSE
