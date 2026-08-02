@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"github.com/RivnZero/telegram-bale-bridge/internal/bale"
 	"github.com/RivnZero/telegram-bale-bridge/internal/bridge"
@@ -19,7 +20,19 @@ import (
 	"time"
 )
 
+var (
+	version = "dev"
+	commit  = "unknown"
+	built   = "unknown"
+)
+
 func main() {
+	showVersion := flag.Bool("version", false, "print version and exit")
+	flag.Parse()
+	if *showVersion {
+		fmt.Printf("telegram-bale-bridge %s\ncommit: %s\nbuilt: %s\n", version, commit, built)
+		return
+	}
 	cfg, err := config.Load()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "invalid configuration: %v\n", err)
