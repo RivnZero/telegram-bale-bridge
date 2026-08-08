@@ -3,7 +3,7 @@ module github.com/RivnZero/telegram-bale-bridge
 go 1.26.3
 
 require (
-	github.com/go-telegram/bot v1.22.0
+	github.com/go-telegram/bot v1.23.0
 	modernc.org/sqlite v1.55.0
 )
 
